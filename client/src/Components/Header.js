@@ -1,18 +1,23 @@
 import React from 'react';
+import { NavLink} from 'react-router-dom';
 
 const Header = () => (
 
     <header>
     <div class="wrap header--flex">
-        <h1 class="header--logo"><a href="index.html">Courses</a></h1>
+        <h1 class="header--logo"><NavLink to="/">Courses</NavLink></h1>
         <nav>
             <ul class="header--signedout">
-                <li><a href="sign-up.html">Sign Up</a></li>
-                <li><a href="sign-in.html">Sign In</a></li>
+                <li>
+                <NavLink to="/signin">Sign In</NavLink>
+                </li>
+                <li>
+                <NavLink to="/signout">Sign Out</NavLink>
+                </li>
             </ul>
         </nav>
     </div>
-</header>
+    </header>
         )
 
-        export default Header;
+export default Header;

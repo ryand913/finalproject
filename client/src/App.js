@@ -1,38 +1,40 @@
 import './App.css';
 import {
   BrowserRouter,
-  // Switch,
-  // Route
+  Switch,
+  Route
 } from "react-router-dom";
 import React, { Component } from 'react'
-import Test from './Components/Test';
+import Header from './Components/Header';
+import Courses from './Components/Courses';
+import CourseDetail from './Components/CourseDetail';
+import CreateCourse from './Components/CreateCourse';
+import UserSignIn from './Components/UserSignIn';
+import UserSignUp from './Components/UserSignUp';
+import UserSignOut from './Components/UserSignOut';
+import UpdateCourse from './Components/UpdateCourse';
+
+import withContext from './Context'
+import PrivateRoute from './PrivateRoute';
+
+const UserSignOutWithContext = withContext(UserSignOut);
+const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn)
 export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      courses: []
-    };
-  } 
-
-  componentDidMount() {
-    this.apiCall();
-  }
-
-apiCall = () => {
-  fetch('http://localhost:5000/api/courses')
-    .then(response => response.json())
-    .then(responseData => {
-      this.setState({courses: responseData})
-    })
-    .catch(error => {
-      console.log('Error fetching and parsing data', error);
-    });
-}  
 render() {
 
   return (
+
     <BrowserRouter>
-    <Test data={this.state.courses}/>
+    <Header />
+    <Switch>
+    <Route exact path="/" render= {()=> <Courses />} />
+    <Route exact path="/courses/create" render= {()=> <CreateCourse />} />
+    <Route exact path="/courses/update/:id" render= {()=> <UpdateCourse />} />
+    <Route path="/courses/:id" render= {()=> <CourseDetail />} />
+    <Route exact path="/signin" render= {()=> <UserSignIn />} />
+    <Route exact path="/signup" render= {()=> <UserSignUp />} />
+    </Switch>
     </BrowserRouter>
   );
 }
