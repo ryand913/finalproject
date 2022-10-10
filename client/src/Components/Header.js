@@ -4,10 +4,10 @@ import { NavLink} from 'react-router-dom';
 const Header = () => (
 
     <header>
-    <div class="wrap header--flex">
-        <h1 class="header--logo"><NavLink to="/">Courses</NavLink></h1>
+    <div className="wrap header--flex">
+        <h1 className="header--logo"><NavLink to="/">Courses</NavLink></h1>
         <nav>
-            <ul class="header--signedout">
+            <ul className="header--signedout">
                 <li>
                 <NavLink to="/signin">Sign In</NavLink>
                 </li>

@@ -83,7 +83,7 @@ router.get('/courses/:id', asyncHandler(async(req,res) =>{
 }));
 
 //add a new course
-router.post('/courses', authenticateUser, asyncHandler(async(req,res) =>{
+router.post('/courses', asyncHandler(async(req,res) =>{
   try {
     await Course.create(req.body);
     let allCourses = await Course.findAll();

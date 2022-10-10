@@ -32,8 +32,8 @@ render() {
     <Route exact path="/courses/create" render= {()=> <CreateCourse />} />
     <Route exact path="/courses/update/:id" render= {()=> <UpdateCourse />} />
     <Route path="/courses/:id" render= {()=> <CourseDetail />} />
-    <Route exact path="/signin" render= {()=> <UserSignIn />} />
-    <Route exact path="/signup" render= {()=> <UserSignUp />} />
+    <Route exact path="/signin" render= {()=> <UserSignInWithContext />} />
+    <Route exact path="/signup" render= {()=> <UserSignUpWithContext />} />
     </Switch>
     </BrowserRouter>
   );
