@@ -17,6 +17,7 @@ import UpdateCourse from './Components/UpdateCourse';
 import withContext from './Context'
 import PrivateRoute from './PrivateRoute';
 
+const CreateCourseWithContext = withContext(CreateCourse);
 const UserSignOutWithContext = withContext(UserSignOut);
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn)
@@ -29,11 +30,11 @@ render() {
     <Header />
     <Switch>
     <Route exact path="/" render= {()=> <Courses />} />
-    <Route exact path="/courses/create" render= {()=> <CreateCourse />} />
+    <PrivateRoute exact path="/courses/create" component = {CreateCourseWithContext} />
     <Route exact path="/courses/update/:id" render= {()=> <UpdateCourse />} />
     <Route path="/courses/:id" render= {()=> <CourseDetail />} />
-    <Route exact path="/signin" render= {()=> <UserSignInWithContext />} />
-    <Route exact path="/signup" render= {()=> <UserSignUpWithContext />} />
+    <Route exact path="/signin" component={UserSignInWithContext} />
+    <Route exact path="/signup" component={UserSignUpWithContext} />
     </Switch>
     </BrowserRouter>
   );

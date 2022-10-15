@@ -30,14 +30,14 @@ class CourseDetail extends Component {
     render(){
         let course = this.state.courses
         return(
-            <body>
-            <div className="actions--bar">
+
+<main>
             <div className="wrap">
                 <NavLink className="button" to={`/courses/update/${course.id}`}>Update Course</NavLink>
                 <NavLink className="button" to={`courses/delete/${course.id}`}>Delete Course</NavLink>
                 <NavLink className="button" to="/">Return to List</NavLink>
             </div>
-        </div>
+
         <div className="wrap">
         <h2>Course Detail</h2>
         <form>
@@ -65,7 +65,7 @@ class CourseDetail extends Component {
             </div>
         </form>
     </div>
-    </body>
+</main>
         )
     }
 }

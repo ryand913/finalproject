@@ -1,39 +1,42 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
+import Context from '../Context'
+export default class CreateCourse extends Component {
 
-export default function CreateCourse(){
-
-        const [title, setTitle] = useState("");
-        const [desc, setDesc] = useState("");
-        const [time, setTime] = useState("");
-        const [materials, setMaterials] = useState("");
-
-        let handleSubmit = async (e) => {
-            console.log(title)
-            e.preventDefault();
-            try {
-              let res = await fetch("http://localhost:5000/api/courses", {
-                method: 'POST',
-                body: JSON.stringify({
-                  title: title,
-                  description: desc,
-                  estimatedTime: time,
-                  materialsNeeded: materials
-                }),
-
-              });
-              console.log(res)
-              if (res.status === 200) {
-                setTitle("");
-                setDesc("");
-                setTime("");
-                setMaterials("")
-              } else {
-                console.log(res.headers)
-              }
-            } catch (err) {
-              console.log(err);
-            }
+        state = {
+            title: '',
+            desc: '',
+            time:'',
+            'materials': ''
           };
+
+          handleSubmit = async (event) => {
+            event.preventDefault();
+            const course = {
+              title: this.state.title,
+              desc: this.state.desc,
+              time: this.state.time,
+              materials: this.state.materials
+            }
+            try {
+            let res = await fetch("http://localhost:5000/api/courses", {
+                        method: 'POST',
+                        body: {
+                            course
+                        },
+        
+                      });
+                      console.log(res)
+                      if (res.status === 200) {
+                        console.log(res)
+                      } else {
+                        console.log("fail")
+                      }
+                    } catch (err) {
+                      console.log(err);
+                    }
+                  }
+          
+render(){
 
         return(
             <div id="root">  
@@ -48,7 +51,7 @@ export default function CreateCourse(){
                                 <li>Please provide a value for "Description"</li>
                             </ul>
                         </div>
-                        <form onSubmit={handleSubmit}>
+                        {/* <form onSubmit={handleSubmit}>
                             <div className="main--flex">
                                 <div>
                                     <label htmlFor="courseTitle">Course Title</label>
@@ -82,7 +85,7 @@ export default function CreateCourse(){
                                 </div>
                             </div>
                             <button className="button" type="submit">Create Course</button><button className="button button-secondary">Cancel</button>
-                        </form>
+                        </form> */}
                     </div>
                 </main>
 
@@ -90,4 +93,4 @@ export default function CreateCourse(){
         </div>
         )
     }
-
+}

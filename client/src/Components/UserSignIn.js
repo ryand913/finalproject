@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-export default class UserSignIn extends Component {
+import { NavLink, withRouter } from 'react-router-dom';
+import Form from './Form'
+import Context from '../Context'
+class UserSignIn extends Component {
     state = {
         emailAddress: '',
         password: '',
@@ -14,27 +16,31 @@ export default class UserSignIn extends Component {
           } = this.state;
         return(
             <main>
-            <div class="form--centered">
+            <div className="form--centered">
                 <h2>Sign In</h2>
-                <form>
-                    <label for="emailAddress">Email Address</label>
-                    <input id="emailAddress" 
-                    name="emailAddress" 
-                    type="email" 
-                    value={emailAddress}
-                    onChange={this.change}
-                    />
-                    <label for="password">Password</label>
-                    <input id="password" 
-                    name="password" 
-                    type="password" 
-                    value={password} 
-                    onChange={this.change}/>
-                    <button class="button" 
-                    type="submit" 
-                    errors={errors}
-                    submit={this.submit}>Sign In</button><button class="button button-secondary" cancel={this.cancel}>Cancel</button>
-                </form>
+                <Form
+                  cancel={this.cancel}
+                  errors={errors}
+                  submit={this.submit}
+                  submitButtonText="Sign In"
+                  elements={() => (
+                    <React.Fragment>
+                      <input
+                        id="emailAddress"
+                        name="emailAddress"
+                        type="email"
+                        value={emailAddress}
+                        onChange={this.change}
+                        placeholder="Email Address" />
+                      <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={password}
+                        onChange={this.change}
+                        placeholder="Password" />
+                    </React.Fragment>
+                  )} />
                 <p>Don't have a user account? Click here to <NavLink to="/signup">sign up!</NavLink></p>
             </div>
         </main>
@@ -42,38 +48,42 @@ export default class UserSignIn extends Component {
     }
 
 
-change = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    change = (event) => {
+      const name = event.target.name;
+      const value = event.target.value;
+  
+      this.setState(() => {
+        return {
+          [name]: value
+        };
+      });
+    }
+  
+    submit = () => {
 
-    this.setState(() => {
-      return {
-        [name]: value
-      };
-    });
-  }
-
-  submit = () => {
-    const { context } = this.props
-    const { email, password} = this.state
-    context.actions.signIn(email, password)
-    .then(user => {
-      if (user == null){
-        this.setState(() => {
-          return { errors: ['Sign-in unsuccessful']}
+      const { context } = this.props;
+      const { emailAddress, password } = this.state;
+  
+      context.actions.signIn(emailAddress, password)
+        .then((user) => {
+          if (user === null) {
+            this.setState(() => {
+              return { errors: [ 'Sign-in was unsuccessful' ] };
+            });
+          } else {
+            console.log('you logged in girl!!')
+            this.props.history.push('/');
+          }
         })
-      } else {
-        this.props.history.push('/authenticated');
-        console.log(`SUCCESS! ${email} is now signed in!`);
-      }
-    })
-    .catch(err => {
-      console.log(err);
-      this.props.history.push('/error');
-    })
+        .catch((error) => {
+          console.error(error);
+          this.props.history.push('/error');
+        });
+    }
+  
+    cancel = () => {
+      this.props.history.push('/');
+    }
   }
 
-  cancel = () => {
-    this.props.history.push('/');
-  }
-}
+  export default withRouter(UserSignIn)
