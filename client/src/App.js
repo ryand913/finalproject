@@ -25,7 +25,8 @@ export default class App extends Component {
 render() {
 
   return (
-
+    <body>
+<div id="root">
     <BrowserRouter>
     <Header />
     <Switch>
@@ -35,8 +36,11 @@ render() {
     <Route path="/courses/:id" render= {()=> <CourseDetail />} />
     <Route exact path="/signin" component={UserSignInWithContext} />
     <Route exact path="/signup" component={UserSignUpWithContext} />
+    <Route path="/signout" component={UserSignOutWithContext} />
     </Switch>
     </BrowserRouter>
+    </div>
+    </body>
   );
 }
 }

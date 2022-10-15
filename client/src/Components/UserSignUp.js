@@ -100,8 +100,8 @@ submit = () => {
     if(errors.length){
       this.setState({ errors });
     } else {
-      console.log(`${firstName} is successfully signed up and authenticated!`)
-      this.context.actions.signIn(emailAddress, password)
+      context.actions.signIn(user.emailAddress, user.password)
+      this.props.history.push('/');
     }
   })
   .catch( err => {

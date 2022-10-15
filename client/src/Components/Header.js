@@ -1,35 +1,35 @@
 import React, { useContext } from 'react';
 import { NavLink} from 'react-router-dom';
-import Context from '../Context'
+import { Context } from '../Context'
 
 const Header = (props) => {
-    const things = useContext(Context)
-    console.log(Context)
+    const user = useContext(Context)
     return(
     <header>
     <div className="wrap header--flex">
         <h1 className="header--logo"><NavLink to="/">Courses</NavLink></h1>
         <nav>
-            <ul className="header--signedout">
+        {user.authenticatedUser ? (
+              <React.Fragment>
+              <ul className="header--signedin">
+                <li>Welcome, {user.authenticatedUser.firstName} {user.authenticatedUser.lastName}</li>
+                <li><NavLink to="/signout">Sign Out</NavLink></li>
+             </ul>
+            </React.Fragment>
+        ) : (
+            <React.Fragment>
+             <ul className="header--signedout">
+                <li>
+                <NavLink to="/signup">Sign Up</NavLink>
+                </li>
                 <li>
                 <NavLink to="/signin">Sign In</NavLink>
                 </li>
-                <li>
-                <NavLink to="/signout">Sign Out</NavLink>
-                </li>
             </ul>
+             </React.Fragment>
+        )}
         </nav>
-        <header>
-            <div className="wrap header--flex">
-                <h1 className="header--logo"><NavLink to="/">Courses</NavLink></h1>
-                <nav>
-                    <ul className="header--signedin">
-                        <li>Welcome, Joe Smith!</li>
-                        <li><NavLink to="/signout">Sign Out</NavLink></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+
     </div>
     </header>
     )

@@ -1,96 +1,122 @@
 import React, { Component } from 'react';
-import Context from '../Context'
+import { Link, NavLink } from 'react-router-dom';
+import Form from './Form';
+import  Context   from '../Context'
 export default class CreateCourse extends Component {
+    state = {
+        title: '',
+        description: '',
+        materialsNeeded: '',
+        estimatedTime: '',
+        errors: [],
+      }
 
-        state = {
-            title: '',
-            desc: '',
-            time:'',
-            'materials': ''
-          };
+    render(){
 
-          handleSubmit = async (event) => {
-            event.preventDefault();
-            const course = {
-              title: this.state.title,
-              desc: this.state.desc,
-              time: this.state.time,
-              materials: this.state.materials
-            }
-            try {
-            let res = await fetch("http://localhost:5000/api/courses", {
-                        method: 'POST',
-                        body: {
-                            course
-                        },
-        
-                      });
-                      console.log(res)
-                      if (res.status === 200) {
-                        console.log(res)
-                      } else {
-                        console.log("fail")
-                      }
-                    } catch (err) {
-                      console.log(err);
-                    }
-                  }
-          
-render(){
-
+        const {
+            title,
+            description,
+            materialsNeeded,
+            estimatedTime,
+            errors,
+          } = this.state;
         return(
-            <div id="root">  
-        <body>
-                <main>
-                    <div className="wrap">
-                        <h2>Create Course</h2>
-                        <div className="validation--errors">
-                            <h3>Validation Errors</h3>
-                            <ul>
-                                <li>Please provide a value for "Title"</li>
-                                <li>Please provide a value for "Description"</li>
-                            </ul>
+          <>
+          <div className="wrap">
+            <main>
+              <div className="main--flex">
+                <h2>Create Course</h2>
+                <Form
+                  cancel={this.cancel}
+                  errors={errors}
+                  submit={this.submit}
+                  submitButtonText="Create Course"
+                  elements={() => (
+                    <React.Fragment>
+                    <div>
+                      <input
+                        id="title"
+                        name="title"
+                        type="text"
+                        value={title}
+                        onChange={this.change}
+                        placeholder="Course Title" />
                         </div>
-                        {/* <form onSubmit={handleSubmit}>
-                            <div className="main--flex">
-                                <div>
-                                    <label htmlFor="courseTitle">Course Title</label>
-                                    <input id="courseTitle"
-                                    name="courseTitle" 
-                                    type="text" 
-                                    value={title || ''}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                    />
-                                    <p>By Joe Smith</p>
-        
-                                    <label htmlFor="courseDescription">Course Description</label>
-                                    <textarea id="courseDescription" 
-                                    name="courseDescription"
-                                    value={desc || ''} 
-                                    onChange={(e) => setDesc(e.target.value)}></textarea>
-                                </div>
-                                <div>
-                                    <label htmlFor="estimatedTime">Estimated Time</label>
-                                    <input id="estimatedTime" 
-                                    name="estimatedTime" type="text" 
-                                    value={time || ''} 
-                                    onChange={(e) => setTime(e.target.value)}/>
-        
-                                    <label htmlFor="materialsNeeded">Materials Needed</label>
-                                    <textarea 
-                                    id="materialsNeeded" 
-                                    name="materialsNeeded" 
-                                    value={materials || ''} 
-                                    onChange={(e) => setMaterials(e.target.value)}></textarea>
-                                </div>
-                            </div>
-                            <button className="button" type="submit">Create Course</button><button className="button button-secondary">Cancel</button>
-                        </form> */}
-                    </div>
-                </main>
-
-        </body>
-        </div>
+                        <div>
+                      <textarea
+                        id="description"
+                        name="description"
+                        type="text"
+                        value={description}
+                        onChange={this.change}
+                        placeholder="Course Description" />
+                        </div>
+                        <div>
+                      <input
+                        id="estimatedTime"
+                        name="estimatedTime"
+                        type="estimatedTime"
+                        value={estimatedTime}
+                        onChange={this.change}
+                        placeholder="Estimated Time" />
+                        </div>
+                        <div>
+                        <textarea
+                        id="materialsNeeded"
+                        name="materialsNeeded"
+                        type="email"
+                        value={materialsNeeded}
+                        onChange={this.change}
+                        placeholder="Materials Needed" />
+                        </div>
+                    </React.Fragment>
+                  )} />
+              </div>
+            </main>
+            </div></>
         )
     }
+
+    change = (event) => {
+      const name = event.target.name;
+      const value = event.target.value;
+  
+      this.setState(() => {
+        return {
+          [name]: value
+        };
+      });
+    }
+
+submit = () => {
+    const { context } = this.props;
+    const {
+      title,
+      description,
+      materialsNeeded,
+    estimatedTime,
+  } = this.state;
+
+  const course = {
+    title,
+    description,
+    materialsNeeded,
+    estimatedTime,
+  };
+  context.data.createCourse(course)
+  .then( errors => {
+    if(errors.length){
+      this.setState({ errors });
+    } else {
+      this.props.history.push('/');
+    }
+  })
+  .catch( err => {
+    console.log(err);
+    this.props.history.push('/error');
+  })
+}
+cancel = () => {
+    this.props.history.push('/');
+  }
 }
