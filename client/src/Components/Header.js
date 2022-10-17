@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { NavLink} from 'react-router-dom';
 import { Context } from '../Context'
 
+//Header present throughout the app that  uses context to determine the authentication status and render the appropriate NavLink
 const Header = (props) => {
     const user = useContext(Context)
     return(

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import Form from './Form'
-import Context from '../Context'
+
+//Take credentials provided in form and submit to data base. Compare them using a helper method getUser in Data.js and authenticate if there is a match.
 class UserSignIn extends Component {
     state = {
         emailAddress: '',
@@ -25,13 +26,15 @@ class UserSignIn extends Component {
                   submitButtonText="Sign In"
                   elements={() => (
                     <React.Fragment>
+                    <label>Email Address</label>
                       <input
                         id="emailAddress"
                         name="emailAddress"
                         type="email"
                         value={emailAddress}
                         onChange={this.change}
-                        placeholder="Email Address" />
+                        placeholder="Email Address" />                       
+                        <label>Password</label>  
                       <input
                         id="password"
                         name="password"

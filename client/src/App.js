@@ -33,7 +33,7 @@ render() {
     <Switch>
     <Route exact path="/" render= {()=> <Courses />} />
     <PrivateRoute exact path="/courses/create" component = {CreateCourseWithContext} />
-    <PrivateRoute path="/courses/update/:id" component = {UpdateCourseWithContext} />
+    <PrivateRoute path="/courses/:id/update" component = {UpdateCourseWithContext} />
     <Route path="/courses/:id" component={CourseDetailWithContext} />
     <Route exact path="/signin" component={UserSignInWithContext} />
     <Route exact path="/signup" component={UserSignUpWithContext} />

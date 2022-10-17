@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
-import Context from '../Context'
+import React from 'react';
 
+//Stateless element to help handle form and unify it across the different form components
 export default (props) => {
   const {
     cancel,

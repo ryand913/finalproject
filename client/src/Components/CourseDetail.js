@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+
+//Renders the course detail page based on the parameter in the url. 
 class CourseDetail extends Component {
     constructor() {
         super();
@@ -39,7 +41,7 @@ class CourseDetail extends Component {
             <div className="wrap">
             {(context.authenticatedUser && context.authenticatedUser.id === course.User?.id)  ? (
               <React.Fragment>
-                <NavLink className="button" to={`/courses/update/${course.id}`}>Update Course</NavLink>
+                <NavLink className="button" to={`/courses/${course.id}/update`}>Update Course</NavLink>
                 <button className="button" onClick={this.remove}>Delete Course</button>
                 <button className="button button-secondary" onClick={this.cancel}>Return To List</button>
             </React.Fragment>
@@ -78,6 +80,7 @@ class CourseDetail extends Component {
 </main>
         )
     }
+//Helpers to make Update/Delete/Return buttons work.
     remove = () => {
       const id = this.state.courses.id
       const { context } = this.props;

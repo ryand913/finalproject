@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Form from './Form';
 export default class CreateCourse extends Component {
+
+    //Renders a form to create a course in the database. The four attributes are passed through a helper method in Data.js
     state = {
         title: '',
         description: '',
@@ -36,7 +38,7 @@ export default class CreateCourse extends Component {
                     <div className="main--flex">
                     <div>
                     <label>
-                    Course Title
+                    Course Title</label>
                       <input
                         id="title"
                         name="title"
@@ -44,10 +46,9 @@ export default class CreateCourse extends Component {
                         value={title}
                         onChange={this.change}
                          />
-                    </label>
                     <p>By {context.authenticatedUser.firstName} {context.authenticatedUser.lastName}</p>
                     <label>
-                    Course Description
+                    Course Description</label>
                       <textarea
                         id="description"
                         name="description"
@@ -55,11 +56,10 @@ export default class CreateCourse extends Component {
                         value={description}
                         onChange={this.change}
                          />
-                        </label>
                         </div>
                         <div>
                         <label>
-                    Esimated Time
+                    Esimated Time</label>
                       <input
                         id="estimatedTime"
                         name="estimatedTime"
@@ -67,9 +67,9 @@ export default class CreateCourse extends Component {
                         value={estimatedTime}
                         onChange={this.change}
                          />
-                        </label>
+
                         <label>
-                    Materials Needed
+                    Materials Needed</label>
                         <textarea
                         id="materialsNeeded"
                         name="materialsNeeded"
@@ -77,7 +77,7 @@ export default class CreateCourse extends Component {
                         value={materialsNeeded}
                         onChange={this.change}
                          />
-                        </label>
+
                         </div>
                         </div>
                     </React.Fragment>
@@ -88,6 +88,7 @@ export default class CreateCourse extends Component {
         )
     }
 
+    //Helper methods for Course Form
     change = (event) => {
       const name = event.target.name;
       const value = event.target.value;

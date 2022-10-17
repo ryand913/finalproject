@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import Form from './Form'
 class UpdateCourse extends Component{
 
+  //Grabs course data from data base into a form someone with appropriate authentication can update
   state = {
     title:'',
     description: '',
@@ -59,7 +60,7 @@ class UpdateCourse extends Component{
                     <div className="main--flex">
                     <div>
                     <label>
-                    Course Title
+                    Course Title</label>
                       <input
                         id="title"
                         name="title"
@@ -67,10 +68,10 @@ class UpdateCourse extends Component{
                         value={title}
                         onChange={this.change}
                          />
-                    </label>
+                    
                     <p>By {context.authenticatedUser.firstName} {context.authenticatedUser.lastName}</p>
                     <label>
-                    Course Description
+                    Course Description</label>
                       <textarea
                         id="description"
                         name="description"
@@ -78,11 +79,11 @@ class UpdateCourse extends Component{
                         value={description}
                         onChange={this.change}
                          />
-                        </label>
+
                         </div>
                         <div>
                         <label>
-                    Esimated Time
+                    Esimated Time</label>
                       <input
                         id="estimatedTime"
                         name="estimatedTime"
@@ -90,9 +91,9 @@ class UpdateCourse extends Component{
                         value={estimatedTime}
                         onChange={this.change}
                          />
-                        </label>
+
                         <label>
-                    Materials Needed
+                    Materials Needed</label>
                         <textarea
                         id="materialsNeeded"
                         name="materialsNeeded"
@@ -100,7 +101,7 @@ class UpdateCourse extends Component{
                         value={materialsNeeded}
                         onChange={this.change}
                          />
-                        </label>
+
                         </div>
                         </div>
                     </React.Fragment>

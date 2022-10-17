@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Not used -- testing
 const Test = props => {
 let courses = props.data;
 console.log(props.data)

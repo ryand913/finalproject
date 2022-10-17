@@ -1,6 +1,7 @@
-import React, { Component, useContext } from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import  Context   from '../Context'
+
+//Fetches all courses from the data base.
 class Course extends Component {
     constructor() {
         super();
@@ -12,7 +13,8 @@ class Course extends Component {
       componentDidMount() {
         this.apiCall();
       }
-    
+
+      //Accesses data from database that is based into state
     apiCall = () => {
       fetch('http://localhost:5000/api/courses')
         .then(response => response.json())
