@@ -26,17 +26,15 @@ class Course extends Component {
     render(){
         let courses = this.state.courses
         return(
+          <>
             <main>
-            <div className="wrap main--grid">
-            
+            <div className="wrap main--grid">         
             {courses.map(course => {
                 return(
-
                     <NavLink className="course--module course--link" to={`/courses/${course.id}`} key={`link-${course.id}`}>
                     <h2 className="course--label" key={`name-${course.id}`}>Course</h2>
                     <h3 className="course--title" key={`title-${course.id}`}>{course.title}</h3>
                     </NavLink>
-
                     )
                 }
             )
@@ -50,6 +48,7 @@ class Course extends Component {
                 </NavLink>
             </div>
         </main>
+        </>
         )
     }
 }

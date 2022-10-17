@@ -19,8 +19,9 @@ import PrivateRoute from './PrivateRoute';
 const CreateCourseWithContext = withContext(CreateCourse);
 const UserSignOutWithContext = withContext(UserSignOut);
 const UserSignUpWithContext = withContext(UserSignUp);
-const UserSignInWithContext = withContext(UserSignIn)
-const CourseDetailWithContext = withContext(CourseDetail)
+const UserSignInWithContext = withContext(UserSignIn);
+const CourseDetailWithContext = withContext(CourseDetail);
+const UpdateCourseWithContext = withContext(UpdateCourse);
 export default class App extends Component {
 render() {
 
@@ -30,20 +31,15 @@ render() {
     <BrowserRouter>
     <Header />
     <Switch>
-
     <Route exact path="/" render= {()=> <Courses />} />
     <PrivateRoute exact path="/courses/create" component = {CreateCourseWithContext} />
-    <PrivateRoute exact path="/courses/update/:id" render= {()=> <UpdateCourse />} />
+    <PrivateRoute path="/courses/update/:id" component = {UpdateCourseWithContext} />
     <Route path="/courses/:id" component={CourseDetailWithContext} />
     <Route exact path="/signin" component={UserSignInWithContext} />
     <Route exact path="/signup" component={UserSignUpWithContext} />
     <Route path="/signout" component={UserSignOutWithContext} />
-
-
     </Switch>
     </BrowserRouter>
-
-
   );
 }
 }

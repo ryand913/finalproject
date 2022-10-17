@@ -29,7 +29,6 @@ const Header = (props) => {
              </React.Fragment>
         )}
         </nav>
-
     </div>
     </header>
     )

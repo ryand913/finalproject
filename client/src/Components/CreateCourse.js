@@ -20,11 +20,13 @@ export default class CreateCourse extends Component {
             estimatedTime,
             errors,
           } = this.state;
+          const { context } = this.props;
+
         return(
           <>
-          <div className="wrap">
+
             <main>
-              <div className="main--flex">
+              <div className="wrap">
                 <h2>Create Course</h2>
                 <Form
                   cancel={this.cancel}
@@ -33,47 +35,58 @@ export default class CreateCourse extends Component {
                   submitButtonText="Create Course"
                   elements={() => (
                     <React.Fragment>
+                    <div className="main--flex">
                     <div>
+                    <label>
+                    Course Title
                       <input
                         id="title"
                         name="title"
                         type="text"
                         value={title}
                         onChange={this.change}
-                        placeholder="Course Title" />
-                        </div>
-                        <div>
+                         />
+                    </label>
+                    <p>By {context.authenticatedUser.firstName} {context.authenticatedUser.lastName}</p>
+                    <label>
+                    Course Description
                       <textarea
                         id="description"
                         name="description"
                         type="text"
                         value={description}
                         onChange={this.change}
-                        placeholder="Course Description" />
+                         />
+                        </label>
                         </div>
                         <div>
+                        <label>
+                    Esimated Time
                       <input
                         id="estimatedTime"
                         name="estimatedTime"
                         type="estimatedTime"
                         value={estimatedTime}
                         onChange={this.change}
-                        placeholder="Estimated Time" />
-                        </div>
-                        <div>
+                         />
+                        </label>
+                        <label>
+                    Materials Needed
                         <textarea
                         id="materialsNeeded"
                         name="materialsNeeded"
                         type="email"
                         value={materialsNeeded}
                         onChange={this.change}
-                        placeholder="Materials Needed" />
+                         />
+                        </label>
+                        </div>
                         </div>
                     </React.Fragment>
                   )} />
               </div>
             </main>
-            </div></>
+            </>
         )
     }
 

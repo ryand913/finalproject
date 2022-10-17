@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter, NavLink } from 'react-router-dom'
-
+import { withRouter, NavLink } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 class CourseDetail extends Component {
     constructor() {
         super();
@@ -58,7 +58,9 @@ class CourseDetail extends Component {
                     <h3 className="course--detail--title">Course</h3>
                     <h4 className="course--name">{course.title}</h4>
                     <p>By {course.User?.firstName} {course.User?.lastName}</p>
-                    <p>{course.description}</p>
+                    <ReactMarkdown
+                    children={course.description}
+                    />
                 </div>
                 <div>
                     <h3 className="course--detail--title">Estimated Time</h3>
@@ -66,7 +68,9 @@ class CourseDetail extends Component {
 
                     <h3 className="course--detail--title">Materials Needed</h3>
                     <ul className="course--detail--list">
-                        <li>{`${course.materialsNeeded}`}</li>
+                    <ReactMarkdown
+                        children={course.materialsNeeded}
+                    />
                     </ul>
                 </div>
             </div>
