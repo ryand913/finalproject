@@ -16,6 +16,7 @@ class CourseDetail extends Component {
         this.apiCall(id);
       }
 
+      //params come from id
     apiCall = (params) => {
 
 
@@ -84,7 +85,6 @@ class CourseDetail extends Component {
     remove = () => {
       const id = this.state.courses.id
       const { context } = this.props;
-      console.log(context)
     context.data.deleteCourse(id, context.authenticatedUser.emailAddress, context.authenticatedUser.password)
     .then( errors => {
       if(errors.length){

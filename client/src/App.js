@@ -16,6 +16,7 @@ import UpdateCourse from './Components/UpdateCourse';
 import withContext from './Context'
 import PrivateRoute from './PrivateRoute';
 
+//Components with Context
 const CreateCourseWithContext = withContext(CreateCourse);
 const UserSignOutWithContext = withContext(UserSignOut);
 const UserSignUpWithContext = withContext(UserSignUp);
@@ -23,6 +24,8 @@ const UserSignInWithContext = withContext(UserSignIn);
 const CourseDetailWithContext = withContext(CourseDetail);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 export default class App extends Component {
+
+  //Creates main site directory. Uses Context from Context file to pass into components so they have access to the current authenticatedUser
 render() {
 
   return (

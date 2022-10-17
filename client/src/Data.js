@@ -1,6 +1,8 @@
 import config from './config';
 
 export default class Data {
+
+  //Define api method - that creates the request using parameters from the helper methods below.
   api(path, method = 'POST', body = null, requiresAuth = false, credentials=null) {
     const url = config.apiBaseUrl + path;
   
@@ -21,6 +23,7 @@ export default class Data {
     return fetch(url, options);
   }
 
+  //Compare the username and password provided from sign in and authenticate.
   async getUser(username,password) {
     const response = await this.api(`/users`, 'GET', null, true, { username, password});
     if (response.status === 200) {
@@ -34,6 +37,7 @@ export default class Data {
     }
   }
   
+  //Take values from sign in form in the user param and add it to data pass, pending form validation
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
     if (response.status === 201) {
@@ -49,21 +53,7 @@ export default class Data {
     }
   }
 
-  async getCourse(course) {
-    const response = await this.api('/courses', 'GET', course);
-    if (response.status === 201) {
-      return [];
-    }
-    else if (response.status === 400) {
-      return response.json().then(data => {
-        return data.errors;
-      });
-    }
-    else {
-      throw new Error();
-    }
-  }
-
+//post course values into database
   async createCourse(course, username, password) {
     const response = await this.api('/courses', 'POST', course, true,  { username, password });
     if (response.status === 201) {
@@ -78,6 +68,8 @@ export default class Data {
       throw new Error();
     }
   }
+
+  //change the values with the correct authentication
   async updateCourse(course, courseid, username, password) {
     const response = await this.api(`/courses/${courseid}`, 'PUT', course, true, {username, password});
     if (response.status === 204) {
