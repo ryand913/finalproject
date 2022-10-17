@@ -41,11 +41,9 @@ class UpdateCourse extends Component{
         description,
         materialsNeeded,
         estimatedTime,
-        id,
         errors,
       } = this.state;
 
-        let course = this.state.courses
         const { context } = this.props;
         return(
             <main>
@@ -142,7 +140,7 @@ submit = () => {
     userId: userId
   };
   console.log(course)
-  context.data.updateCourse(course, courseid, context.authenticatedUser.emailAddress, context.password )
+  context.data.updateCourse(course, courseid, context.authenticatedUser.emailAddress, context.authenticatedUser.password )
   .then( errors => {
     if(errors.length){
       this.setState({ errors });

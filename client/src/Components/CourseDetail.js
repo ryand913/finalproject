@@ -31,7 +31,7 @@ class CourseDetail extends Component {
     render(){
       let { context } = this.props
       let course = this.state.courses
-
+      
         return(
 
           <main>
@@ -67,11 +67,10 @@ class CourseDetail extends Component {
                     <p>{course.estimatedTime}</p>
 
                     <h3 className="course--detail--title">Materials Needed</h3>
-                    <ul className="course--detail--list">
                     <ReactMarkdown
-                        children={course.materialsNeeded}
+                    className="course--detail--list"
+                    children={course.materialsNeeded}
                     />
-                    </ul>
                 </div>
             </div>
         </form>
@@ -83,7 +82,7 @@ class CourseDetail extends Component {
       const id = this.state.courses.id
       const { context } = this.props;
       console.log(context)
-    context.data.deleteCourse(id, context.authenticatedUser.emailAddress, context.password)
+    context.data.deleteCourse(id, context.authenticatedUser.emailAddress, context.authenticatedUser.password)
     .then( errors => {
       if(errors.length){
         this.setState({ errors });
