@@ -1,4 +1,3 @@
-import './App.css';
 import {
   BrowserRouter,
   Switch,
@@ -27,20 +26,23 @@ render() {
 
   return (
 
-<div id="root">
+
     <BrowserRouter>
     <Header />
     <Switch>
+
     <Route exact path="/" render= {()=> <Courses />} />
-    <Route exact path="/courses/create" component = {CreateCourseWithContext} />
-    <Route exact path="/courses/update/:id" render= {()=> <UpdateCourse />} />
+    <PrivateRoute exact path="/courses/create" component = {CreateCourseWithContext} />
+    <PrivateRoute exact path="/courses/update/:id" render= {()=> <UpdateCourse />} />
     <Route path="/courses/:id" component={CourseDetailWithContext} />
     <Route exact path="/signin" component={UserSignInWithContext} />
     <Route exact path="/signup" component={UserSignUpWithContext} />
     <Route path="/signout" component={UserSignOutWithContext} />
+
+
     </Switch>
     </BrowserRouter>
-    </div>
+
 
   );
 }

@@ -31,12 +31,12 @@ class Course extends Component {
             
             {courses.map(course => {
                 return(
-                    <>
+
                     <NavLink className="course--module course--link" to={`/courses/${course.id}`} key={`link-${course.id}`}>
                     <h2 className="course--label" key={`name-${course.id}`}>Course</h2>
-                    <h3 className="course--title " key={`title-${course.id}`}>{course.title}</h3>
+                    <h3 className="course--title" key={`title-${course.id}`}>{course.title}</h3>
                     </NavLink>
-                    </>
+
                     )
                 }
             )

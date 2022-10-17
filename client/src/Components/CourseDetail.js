@@ -26,29 +26,30 @@ class CourseDetail extends Component {
           console.log('Error fetching and parsing data', error);
         });
     }  
+
     
     render(){
       let { context } = this.props
-      console.log(context)
-        let course = this.state.courses
-      console.log(`${context.authenticatedUser.id} + ${course.User?.id}`)
+      let course = this.state.courses
+
         return(
 
-<main>
+          <main>
+          <div className="actions--bar">
             <div className="wrap">
             {(context.authenticatedUser && context.authenticatedUser.id === course.User?.id)  ? (
               <React.Fragment>
                 <NavLink className="button" to={`/courses/update/${course.id}`}>Update Course</NavLink>
-                <NavLink className="button" to={`courses/delete/${course.id}`}>Delete Course</NavLink>
-                <NavLink className="button" to="/">Return to List</NavLink>
+                <button className="button" onClick={this.remove}>Delete Course</button>
+                <button className="button button-secondary" onClick={this.cancel}>Return To List</button>
             </React.Fragment>
             ) : (
               <React.Fragment>
-                <NavLink className="button" to="/">Return to List</NavLink>
+              <button className="button button-secondary" onClick={this.cancel}>Return To List</button>
             </React.Fragment>
             )}
             </div>
-
+            </div>
         <div className="wrap">
         <h2>Course Detail</h2>
         <form>
@@ -65,12 +66,7 @@ class CourseDetail extends Component {
 
                     <h3 className="course--detail--title">Materials Needed</h3>
                     <ul className="course--detail--list">
-                    {/* {course.map(material => {
-                        return( */}
-                            <li>{`${course.materialsNeeded}`}</li>
-                            {/* )
-                    })
-                    } */}
+                        <li>{`${course.materialsNeeded}`}</li>
                     </ul>
                 </div>
             </div>
@@ -79,6 +75,27 @@ class CourseDetail extends Component {
 </main>
         )
     }
+    remove = () => {
+      const id = this.state.courses.id
+      const { context } = this.props;
+      console.log(context)
+    context.data.deleteCourse(id, context.authenticatedUser.emailAddress, context.password)
+    .then( errors => {
+      if(errors.length){
+        this.setState({ errors });
+      } else {
+        this.props.history.push('/');
+      }
+    })
+    .catch( err => {
+      console.log(err);
+      this.props.history.push('/error');
+    })
+    }
+    cancel = () => {
+      this.props.history.push('/');
+    }
 }
+
 
 export default withRouter(CourseDetail);
