@@ -71,7 +71,9 @@ class UserSignIn extends Component {
               return { errors: [ 'Sign-in was unsuccessful' ] };
             });
           } else {
-            console.log('you logged in girl!!')
+            // this.setState(() => {
+            //   return { password: password}
+            // })
             this.props.history.push('/');
           }
         })

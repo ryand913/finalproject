@@ -28,14 +28,25 @@ class CourseDetail extends Component {
     }  
     
     render(){
+      let { context } = this.props
+      console.log(context)
         let course = this.state.courses
+      console.log(`${context.authenticatedUser.id} + ${course.User?.id}`)
         return(
 
 <main>
             <div className="wrap">
+            {(context.authenticatedUser && context.authenticatedUser.id === course.User?.id)  ? (
+              <React.Fragment>
                 <NavLink className="button" to={`/courses/update/${course.id}`}>Update Course</NavLink>
                 <NavLink className="button" to={`courses/delete/${course.id}`}>Delete Course</NavLink>
                 <NavLink className="button" to="/">Return to List</NavLink>
+            </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <NavLink className="button" to="/">Return to List</NavLink>
+            </React.Fragment>
+            )}
             </div>
 
         <div className="wrap">

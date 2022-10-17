@@ -12,14 +12,17 @@ export class Provider extends Component {
     this.cookie = Cookies.get('authenticatedUser');
 
     this.state = {
-      authenticatedUser: this.cookie ? JSON.parse(this.cookie) : null
+      authenticatedUser: this.cookie ? JSON.parse(this.cookie) : null,
     };
   }
 
   render() {
-    const { authenticatedUser } = this.state;
+    const { authenticatedUser, password } = this.state;
+    
+
     const value = {
       authenticatedUser,
+      password,
       data: this.data,
       actions: {
         signIn: this.signIn,
@@ -40,6 +43,7 @@ export class Provider extends Component {
       this.setState(() => {
         return {
           authenticatedUser: user,
+          password: password
         };
       });
       const cookieOptions = {

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Form from './Form';
 import  Context   from '../Context'
@@ -89,12 +89,15 @@ export default class CreateCourse extends Component {
     }
 
 submit = () => {
+
     const { context } = this.props;
+    const userId = context.authenticatedUser.id
+    console.log(userId)
     const {
       title,
       description,
       materialsNeeded,
-    estimatedTime,
+    estimatedTime
   } = this.state;
 
   const course = {
@@ -102,8 +105,10 @@ submit = () => {
     description,
     materialsNeeded,
     estimatedTime,
+    userId: userId
   };
-  context.data.createCourse(course)
+  console.log(course)
+  context.data.createCourse(course, context.authenticatedUser.emailAddress, context.password )
   .then( errors => {
     if(errors.length){
       this.setState({ errors });
