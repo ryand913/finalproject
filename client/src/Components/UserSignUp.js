@@ -91,7 +91,7 @@ submit = () => {
       firstName,
       lastName,
       emailAddress,
-    password,
+    password
   } = this.state;
 
   const user = {

@@ -20,24 +20,33 @@ module.exports = (sequelize) => {
     firstName:{
         type: DataTypes.STRING,
         allowNull: false,
+        notEmpty: true,
         validate:{
           notNull: {
             msg: "A first name is required"
+          },
+          notEmpty:{
+            msg: "A first name is required to make an account"
           }
         }
     },
     lastName:{
         type: DataTypes.STRING,
         allowNull: false,
+        notEmpty: true,
         validate:{
           notNull: {
             msg: "A last name is required"
+          },
+          notEmpty:{
+            msg: "A last name is required to make an account"
           }
         }
     },
     emailAddress:{
         type: DataTypes.STRING,
         allowNull: false,
+        notEmpty: true,
         unique: {
           msg: 'Email address already in use!'
         },
@@ -47,13 +56,17 @@ module.exports = (sequelize) => {
             msg: "An email address is required"
           },
           isEmail: {
-            msg: 'Please provide a valid email address'
+            msg: 'Please provide a valid email address to make an account'
+          },
+          notEmpty:{
+            msg: "An email address is required  to make an account"
           }
         }
     },
     password:{
         type: DataTypes.STRING,
         allowNull: false,
+        notEmpty: true,
         set(val){
           const hashPassword = bcrypt.hashSync(val,10);
           this.setDataValue('password', hashPassword)
@@ -61,6 +74,9 @@ module.exports = (sequelize) => {
         validate: {
           notNull: {
             msg: 'A password is required'
+          },
+          notEmpty:{
+            msg: "A password is required to make an account"
           }
         }
     },

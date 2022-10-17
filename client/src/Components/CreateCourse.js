@@ -67,7 +67,6 @@ export default class CreateCourse extends Component {
                         value={estimatedTime}
                         onChange={this.change}
                          />
-
                         <label>
                     Materials Needed</label>
                         <textarea
@@ -119,7 +118,6 @@ submit = () => {
     estimatedTime,
     userId: userId
   };
-  console.log(course)
   context.data.createCourse(course, context.authenticatedUser.emailAddress, context.authenticatedUser.password )
   .then( errors => {
     if(errors.length){
@@ -130,7 +128,6 @@ submit = () => {
   })
   .catch( err => {
     console.log(err);
-    this.props.history.push('/error');
   })
 }
 cancel = () => {
