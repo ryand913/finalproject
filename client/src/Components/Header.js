@@ -1,6 +1,10 @@
 import React, { useContext } from 'react';
 import { NavLink} from 'react-router-dom';
 import { Context } from '../Context'
+const braze = require("@braze/web-sdk");
+braze.initialize('e93769d0-8159-454f-9a37-dce9c16ea4b3', {
+  baseUrl: "sondheim.braze.com"
+});
 
 //Header present throughout the app that  uses context to determine the authentication status and render the appropriate NavLink
 const Header = (props) => {
@@ -21,7 +25,7 @@ const Header = (props) => {
             <React.Fragment>
              <ul className="header--signedout">
                 <li>
-                <NavLink to="/signup">Sign Up</NavLink>
+                <NavLink to="/signup" onClick={braze.requestPushPermission()}>Sign Up</NavLink>
                 </li>
                 <li>
                 <NavLink to="/signin">Sign In</NavLink>

@@ -1,8 +1,31 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Form from './Form';
-
+const braze = require("@braze/web-sdk");
 //Intake form for site - creates info in our database that will be referenced to log in and create courses
+
+braze.initialize('e93769d0-8159-454f-9a37-dce9c16ea4b3', {
+  baseUrl: "sondheim.braze.com"
+});
+
+
+braze.openSession();
+braze.requestPushPermission();
+function stringToHash(string) {
+                  
+  var hash = 0;
+    
+  if (string.length == 0) return hash;
+    
+  for (let i = 0; i < string.length; i++) {
+      let char = string.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+  }
+    
+  return hash;
+}
+
 export default class UserSignUp extends Component {
     state = {
         firstName: '',
@@ -106,6 +129,11 @@ submit = () => {
       this.setState({ errors });
     } else {
       context.actions.signIn(user.emailAddress, user.password)
+      braze.changeUser(`${stringToHash(user.emailAddress)}`);
+      braze.getUser().setFirstName(`${user.firstName}`);
+      braze.getUser().setLastName(`${user.lastName}`);
+      braze.getUser().setEmail(`${user.emailAddress}`);
+      braze.logCustomEvent('signedup');
       this.props.history.push('/');
     }
   })
@@ -115,6 +143,7 @@ submit = () => {
   })
 }
 cancel = () => {
+  braze.logCustomEvent("canceled-signup");
     this.props.history.push('/');
   }
 }

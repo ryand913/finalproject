@@ -76,7 +76,6 @@ export default class CreateCourse extends Component {
                         value={materialsNeeded}
                         onChange={this.change}
                          />
-
                         </div>
                         </div>
                     </React.Fragment>

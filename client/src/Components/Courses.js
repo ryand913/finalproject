@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+
 //Fetches all courses from the data base.
 class Course extends Component {
     constructor() {
@@ -24,7 +25,8 @@ class Course extends Component {
         .catch(error => {
           console.log('Error fetching and parsing data', error);
         });
-    }  
+    }
+
     render(){
         let courses = this.state.courses
         return(
@@ -53,6 +55,6 @@ class Course extends Component {
         </>
         )
     }
+    
 }
-
 export default Course
