@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Form from './Form';
+
 export default class CreateCourse extends Component {
 
     //Renders a form to create a course in the database. The four attributes are passed through a helper method in Data.js

@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import Form from './Form'
+const braze = require("@braze/web-sdk");
 
+braze.initialize('e93769d0-8159-454f-9a37-dce9c16ea4b3', {
+  baseUrl: "sondheim.braze.com"
+});
+
+function stringToHash(string) {
+                  
+  var hash = 0;
+    
+  if (string.length == 0) return hash;
+    
+  for (let i = 0; i < string.length; i++) {
+      let char = string.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+  }
+    
+  return hash;
+}
 //Take credentials provided in form and submit to data base. Compare them using a helper method getUser in Data.js and authenticate if there is a match.
 class UserSignIn extends Component {
     state = {
@@ -77,6 +96,7 @@ class UserSignIn extends Component {
             // this.setState(() => {
             //   return { password: password}
             // })
+            braze.changeUser(`${stringToHash(user.emailAddress)}`);
             this.props.history.push('/');
           }
         })
