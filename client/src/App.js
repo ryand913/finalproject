@@ -25,7 +25,9 @@ braze.initialize('e93769d0-8159-454f-9a37-dce9c16ea4b3', {
 
 braze.openSession();
 braze.automaticallyShowInAppMessages();
-console.log(document.cookie)
+braze.requestContentCardsRefresh();
+braze.showContentCards();
+
 //Components with Context
 const CreateCourseWithContext = withContext(CreateCourse);
 const UserSignOutWithContext = withContext(UserSignOut);
