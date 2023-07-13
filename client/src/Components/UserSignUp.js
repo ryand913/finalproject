@@ -5,7 +5,8 @@ const braze = require("@braze/web-sdk");
 //Intake form for site - creates info in our database that will be referenced to log in and create courses
 
 braze.initialize('e93769d0-8159-454f-9a37-dce9c16ea4b3', {
-  baseUrl: "sondheim.braze.com"
+  baseUrl: "sondheim.braze.com",
+  noCookies: true
 });
 
 
@@ -87,10 +88,12 @@ export default class UserSignUp extends Component {
                         value={password}
                         onChange={this.change}
                         placeholder="Password" />
+
                     </React.Fragment>
                   )} />
 
                 <p>Already have a user account?Click here to <NavLink to="/signin">sign in</NavLink>!</p>
+                
               </div>
             </main></>
         )
@@ -142,6 +145,9 @@ submit = () => {
   })
 }
 cancel = () => {
+  braze.initialize('e93769d0-8159-454f-9a37-dce9c16ea4b3', {
+    baseUrl: "sondheim.braze.com"
+  });
   braze.logCustomEvent("canceled-signup");
     this.props.history.push('/');
   }

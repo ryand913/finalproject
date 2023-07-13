@@ -4,14 +4,16 @@ import Form from './Form'
 const braze = require("@braze/web-sdk");
 
 braze.initialize('e93769d0-8159-454f-9a37-dce9c16ea4b3', {
-  baseUrl: "sondheim.braze.com"
+  baseUrl: "sondheim.braze.com",
+  noCookies: true
 });
+console.log(document.cookie)
 
 function stringToHash(string) {
                   
   var hash = 0;
     
-  if (string.length == 0) return hash;
+  if (string.length === 0) return hash;
     
   for (let i = 0; i < string.length; i++) {
       let char = string.charCodeAt(i);
@@ -68,8 +70,6 @@ class UserSignIn extends Component {
         </main>
         )
     }
-
-
     change = (event) => {
       const name = event.target.name;
       const value = event.target.value;

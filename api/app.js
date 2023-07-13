@@ -14,7 +14,9 @@ app.use(express.json());
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
 app.use(cors());
-
+app.get("/service-worker.js", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "public", "/service-worker.js"));
+});
 (async () => {
   try {
     await Sequelize.authenticate();

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-
+const braze = require("@braze/web-sdk");
 //Renders the course detail page based on the parameter in the url. 
 class CourseDetail extends Component {
     constructor() {
@@ -34,7 +34,8 @@ class CourseDetail extends Component {
     render(){
       let { context } = this.props
       let course = this.state.courses
-      
+      braze.automaticallyShowInAppMessages();
+      braze.logCustomEvent('viewedcourse');
         return(
 
           <main>
